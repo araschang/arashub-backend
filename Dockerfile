@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 55688
 
-CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:55688", "wsgi:app", "--log-level=debug", "--timeout", "300"]
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:55688", "wsgi:app", "--log-level=debug", "--timeout", "300"]

@@ -1,4 +1,4 @@
-from Routes.Api import app
+from Route.Api import app
 
 
 if __name__ == "__main__":

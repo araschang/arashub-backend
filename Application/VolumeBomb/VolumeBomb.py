@@ -71,7 +71,7 @@ class VolumeBomb(Connector):
         return mean_volume
 
     def checkSignal(self, symbol, mean_volume, ohlcv_df):
-        slope = ohlcv_df['CLOSE'].iloc[-1] - ohlcv_df['CLOSE'].iloc[-10]
+        slope = ohlcv_df['close'].iloc[-1] - ohlcv_df['close'].iloc[-10]
 
         if slope <= 0:
             trend = '下跌'
