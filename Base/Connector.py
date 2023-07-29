@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from discord import Webhook, RequestsWebhookAdapter
+from discord import SyncWebhook
 from Base.ConfigReader import Config
 from Base.Wrapper import singleton
 
@@ -22,5 +22,5 @@ class MongoDBConnector(Connector):
 
 class DiscordConnector:
     def sendMessage(self, webhook, message):
-        webhook = Webhook.from_url(webhook, adapter=RequestsWebhookAdapter())
+        webhook = SyncWebhook.from_url(webhook)
         webhook.send(message)
