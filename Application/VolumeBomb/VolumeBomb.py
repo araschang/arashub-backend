@@ -2,7 +2,7 @@ import ccxt.async_support as ccxt
 import asyncio
 import nest_asyncio
 import pandas as pd
-from Base.Connector import DiscordConnector
+from Base.Connector import MongoDBConnector, DiscordConnector
 from Base.ConfigReader import Config
 nest_asyncio.apply()
 
@@ -19,6 +19,7 @@ class VolumeBomb(Connector):
     def __init__(self):
         super().__init__()
         self.EXCHANGE = 'Binance'
+        self.mongo = MongoDBConnector().getConn()
         self.discord = DiscordConnector()
         self.exchange = ccxt.binanceusdm({
             'apiKey': self.config['Binance']['apiKey'],
@@ -71,6 +72,14 @@ class VolumeBomb(Connector):
         return mean_volume
 
     def checkSignal(self, symbol, mean_volume, ohlcv_df):
+
+        try:
+            previous_data = self.mongo['indicators']['volume_bomb'].find_one({'symbol': symbol})
+            if int(previous_data['time']) == int(ohlcv_df['time'].iloc[-1]):
+                return
+        except:
+            pass
+
         slope = ohlcv_df['close'].iloc[-1] - ohlcv_df['close'].iloc[-10]
 
         if slope <= 0:
@@ -81,4 +90,5 @@ class VolumeBomb(Connector):
         if ohlcv_df['volume'].iloc[-1] >= mean_volume * 9:
             message = f"**[🔥｜Volume Bomb]**\n**{symbol}爆量{trend}**\n```現價：{ohlcv_df['close'].iloc[-1]}\n成交量：{ohlcv_df['volume'].iloc[-1]}```"
             self.discord.sendMessage(self.config['Discord']['VolumeBomb'], message)
+            self.mongo['indicators']['volume_bomb'].update_one({'symbol': symbol}, {'$set': {'symbol': symbol, 'time': ohlcv_df['time'].iloc[-1]}}, upsert=True)
 
