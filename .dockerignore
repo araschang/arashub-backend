@@ -1,0 +1,29 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook
+.ipynb
+
+# VScode
+.vscode
+
+# Python env
+venv
+
+# Logs
+*.log
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Git
+.git
+.gitignore
+
+# Django stuff:
+*.log
+
+scraper-refer/

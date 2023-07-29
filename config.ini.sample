@@ -1,0 +1,22 @@
+[MySQL]
+user = 
+password = 
+host = 
+database = 
+port = 
+ssl_ca = 
+
+[MongoDB]
+host = 
+port = 
+username = 
+password = 
+
+[Redis]
+host = 
+
+[CoinMarketCap]
+api_key = 
+
+[Scraper]
+mode = debug
