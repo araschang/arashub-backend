@@ -1,22 +1,12 @@
-[MySQL]
-user = 
-password = 
-host = 
-database = 
-port = 
-ssl_ca = 
-
 [MongoDB]
 host = 
-port = 
-username = 
-password = 
 
-[Redis]
-host = 
+[Binance]
+apiKey = 
+secret = 
 
-[CoinMarketCap]
-api_key = 
-
-[Scraper]
-mode = debug
+[Discord]
+MagicFormula = 
+F-score = 
+VolumeBomb = 
+DEV = 
