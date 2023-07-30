@@ -90,5 +90,4 @@ class VolumeBomb(Connector):
         if ohlcv_df['volume'].iloc[-1] >= mean_volume * 9:
             message = f"**[🔥｜Volume Bomb]**\n**{symbol}爆量{trend}**\n```現價：{ohlcv_df['close'].iloc[-1]}\n成交量：{ohlcv_df['volume'].iloc[-1]}```"
             self.discord.sendMessage(self.config['Discord']['VolumeBomb'], message)
-            self.mongo['indicators']['volume_bomb'].update_one({'symbol': symbol}, {'$set': {'symbol': symbol, 'time': ohlcv_df['time'].iloc[-1]}}, upsert=True)
-
+            self.mongo['indicators']['volume_bomb'].update_one({'symbol': symbol}, {'$set': {'symbol': symbol, 'time': int(ohlcv_df['time'].iloc[-1])}}, upsert=True)
