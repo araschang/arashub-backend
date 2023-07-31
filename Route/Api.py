@@ -15,7 +15,7 @@ def stable_check():
     config = Config()
     message = 'I am alive.'
     discord.sendMessage(config['Discord']['DEV'], message)
-sched = BackgroundScheduler()
+sched = BackgroundScheduler(job_defaults={'max_instances': 3})
 sched.add_job(stable_check, 'interval', hours=12, next_run_time=datetime.now() + timedelta(seconds=10))
 sched.start()
 

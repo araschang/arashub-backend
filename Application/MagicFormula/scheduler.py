@@ -3,7 +3,7 @@ from Application.MagicFormula.MagicFormula import MagicFormula
 import asyncio
 import threading
 
-scheduler = AsyncIOScheduler()
+scheduler = AsyncIOScheduler(job_defaults={'max_instances': 3})
 
 def run():
     asyncio.set_event_loop(asyncio.new_event_loop())
