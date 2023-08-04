@@ -54,6 +54,7 @@ class MagicFormula(Connector):
         if into_top_10:
             message += "\n**股票進入前十名:**\n```" + "\n".join(into_top_10) + "```"
 
+        self.mongo['indicators']['magic_formula'].update_one({'name': 'magic_formula'}, {'$set': {'stocks': top_10}})
         self.discord.sendMessage(self.webhook, message)
 
     async def get_ebit(self, session, stock):
